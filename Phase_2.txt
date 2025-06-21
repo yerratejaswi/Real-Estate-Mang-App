@@ -1,0 +1,106 @@
+-- Create the database
+CREATE DATABASE realestateAPP;
+USE realestateAPP;
+
+-- Users table
+CREATE TABLE users (
+  username VARCHAR(255) NOT NULL,
+  emailID VARCHAR(255) PRIMARY KEY,
+  password VARCHAR(255) NOT NULL,
+  type ENUM('agent', 'perspective_renter') NOT NULL
+);
+
+-- Agents table
+CREATE TABLE agents (
+  emailID VARCHAR(255) PRIMARY KEY,
+  username CHAR(25),
+  position VARCHAR(25) NOT NULL,
+  company_name VARCHAR(25) NOT NULL,
+  phone_no VARCHAR(20) NOT NULL,
+  FOREIGN KEY (emailID) REFERENCES users(emailID)
+);
+
+-- Perspective Renters table
+CREATE TABLE perspective_renters (
+  emailID VARCHAR(255) PRIMARY KEY,
+  username CHAR(255),
+  check_in_date DATE NOT NULL,
+  preflocation VARCHAR(255) NOT NULL,
+  budget INT NOT NULL,
+  FOREIGN KEY (emailID) REFERENCES users(emailID)
+);
+
+-- Renters Address table
+CREATE TABLE rentersAddress (
+  emailID VARCHAR(255) PRIMARY KEY,
+  addID INT UNIQUE,
+  street VARCHAR(25),
+  suit VARCHAR(25),
+  zip_code NUMERIC(5),
+  city CHAR(25),
+  state CHAR(25),
+  country CHAR(25),
+  FOREIGN KEY (emailID) REFERENCES perspective_renters(emailID)
+);
+
+-- Credit Card Information
+CREATE TABLE creditCard_information (
+  emailID VARCHAR(255),
+  Card_No VARCHAR(16) PRIMARY KEY NOT NULL,
+  Exp_date DATE NOT NULL,
+  Card_holder CHAR(25) NOT NULL,
+  cvv NUMERIC(3) NOT NULL,
+  FOREIGN KEY (emailID) REFERENCES perspective_renters(emailID)
+);
+
+-- Property table
+CREATE TABLE property (
+  propertyID INT AUTO_INCREMENT PRIMARY KEY,
+  emailID VARCHAR(255),
+  property_type ENUM('house', 'apartment', 'commercial_building') NOT NULL,
+  location CHAR(35),
+  city CHAR(35),
+  address VARCHAR(100),
+  price INT,
+  description VARCHAR(255),
+  availability DATE,
+  images VARCHAR(25),
+  FOREIGN KEY (emailID) REFERENCES agents(emailID)
+);
+
+-- Houses table
+CREATE TABLE houses (
+  houseID INT UNIQUE,
+  no_of_rooms INT,
+  area_in_sqft INT,
+  FOREIGN KEY (houseID) REFERENCES property(propertyID)
+);
+
+-- Apartments table
+CREATE TABLE apartments (
+  aptID INT UNIQUE,
+  no_of_rooms INT,
+  area_in_sqft INT,
+  building_type VARCHAR(25),
+  FOREIGN KEY (aptID) REFERENCES property(propertyID)
+);
+
+-- Commercial Building table
+CREATE TABLE commercial_building (
+  buildingID INT UNIQUE,
+  location CHAR(55),
+  area_in_sft INT,
+  type_of_building VARCHAR(25),
+  FOREIGN KEY (buildingID) REFERENCES property(propertyID)
+);
+
+-- Reservation Entry table
+CREATE TABLE ReservationEntry (
+  ReservationID INT PRIMARY KEY AUTO_INCREMENT,
+  emailID VARCHAR(255) NOT NULL,
+  rentalID INT UNIQUE NOT NULL,
+  creditCard VARCHAR(16),
+  FOREIGN KEY (emailID) REFERENCES perspective_renters(emailID),
+  FOREIGN KEY (rentalID) REFERENCES property(propertyID),
+  FOREIGN KEY (creditCard) REFERENCES creditCard_information(Card_No)
+);

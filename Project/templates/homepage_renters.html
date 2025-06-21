@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Real Estate Management System</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1570129477492-45c003edd2be'); /* Real estate background */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      backdrop-filter: brightness(0.95);
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: #00a8ff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.9);
+      margin: 40px auto;
+      width: 95%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2f3640;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 30px;
+      background-color: white;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #00a8ff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f4faff;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    form {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    label {
+      display: inline-block;
+      width: 150px;
+      text-align: right;
+    }
+
+    input[type="text"], textarea, input[type="number"] {
+      display: inline-block;
+      width: 300px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+      font-size: 16px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="submit"] {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Welcome to Real Estate Management System</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="{{ url_for('login') }}">Logout</a></li>
+        <br><br>
+        <li><a href="{{url_for('rewards',email=email)}}">Rewards</a></li>
+        <li><a href="{{url_for('bookings',data=email)}}">Bookings</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>List of Available Properties</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Property ID</th>
+          <th>Property Type</th>
+          <th>Location</th>
+          <th>City</th>
+          <th>Address</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Crimerate</th>
+          <th>Nearby Schools</th>
+          <th>Availability</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>{{ row[4] }}</td>
+          <td>{{ row[5] }}</td>
+          <td>{{ row[6] }}</td>
+          <td>{{ row[7] }}</td>
+          <td>{{ row[11] }}</td>
+          <td>{{ row[12] }}</td>
+          <td>{{ row[8] }}</td>
+          <td>
+            <button onclick="window.location='{{ url_for('book_now', id=row[1], email=email) }}'">
+              Book Now
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+
+</body>
+</html>

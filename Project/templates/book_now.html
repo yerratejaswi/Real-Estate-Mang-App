@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Property</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f6fa;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #2c3e50;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .section {
+      flex: 1 1 45%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      color: #34495e;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      padding-left: 0;
+      list-style: none;
+      font-size: 16px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      .section {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+  <script>
+    function checkAddressInput() {
+      const addressSelect = document.getElementById("address-select");
+      const newAddressInput = document.getElementById("new-address-input");
+      newAddressInput.style.display = addressSelect.value === "new-address" ? "block" : "none";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const type_ = "{{ data[1] }}";
+      document.getElementById("labels1").style.display = (type_ === 'house' || type_ === 'apartment') ? "block" : "none";
+      document.getElementById("labels2").style.display = (type_ === 'commercial_building') ? "block" : "none";
+    });
+  </script>
+</head>
+<body>
+
+  <h1>Book Now</h1>
+  <div class="container">
+
+    <!-- Left: Property Info -->
+    <div class="section">
+      <h2>Property Information</h2>
+      <ul>
+        <li><strong>Type:</strong> {{ data[1] }}</li>
+
+        <div id="labels1" class="hidden">
+          <li><strong>Rooms:</strong> {{ ind[0] }}</li>
+          <li><strong>Sq.Ft:</strong> {{ ind[1] }}</li>
+        </div>
+        <div id="labels2" class="hidden">
+          <li><strong>Sq.Ft:</strong> {{ ind[0] }}</li>
+          <li><strong>Building Type:</strong> {{ ind[1] }}</li>
+        </div>
+
+        <li><strong>Location:</strong> {{ data[2] }}</li>
+        <li><strong>City:</strong> {{ data[3] }}</li>
+        <li><strong>Address:</strong> {{ data[4] }}</li>
+        <li><strong>Price:</strong> ${{ data[5] }}</li>
+        <li><strong>Description:</strong> {{ data[6] }}</li>
+        <li><strong>Crimerate:</strong> {{ data[8] }}</li>
+        <li><strong>Nearby Schools:</strong> {{ data[9] }}</li>
+        <li><strong>Move-in Date:</strong> {{ data[7] }}</li>
+      </ul>
+    </div>
+
+    <!-- Right: Billing Info -->
+    <div class="section">
+      <h2>Billing Information</h2>
+      <form action="{{ url_for('payment', id=data[0], email=email, type=data[1]) }}" method="POST">
+
+        <label>Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Select Address:</label>
+        <select name="address-select" id="address-select" onchange="checkAddressInput()" required>
+          <option value="select">-- Select an address --</option>
+          {% for row in address %}
+            <option value="{{ row[1] }}">{{ row[2] }} {{ row[3] }} {{ row[4] }} {{ row[5] }} {{ row[6] }} {{ row[7] }}</option>
+          {% endfor %}
+          <option value="new-address">New Address</option>
+        </select>
+
+        <!-- New Address Block -->
+        <div id="new-address-input" class="hidden">
+          <label>Address Line 1:</label>
+          <input type="text" name="new-address-line-1">
+          <label>Address Line 2:</label>
+          <input type="text" name="new-address-line-2">
+          <label>Postal Code:</label>
+          <input type="text" name="new-address-postal-code">
+          <label>City:</label>
+          <input type="text" name="new-address-city">
+          <label>State:</label>
+          <input type="text" name="new-address-state">
+          <label>Country:</label>
+          <input type="text" name="new-address-country">
+        </div>
+
+        <!-- Card Info -->
+        <label>Credit Card Number:</label>
+        <input type="text" name="credit_card" maxlength="16" pattern="\d{16}" required>
+
+        <label>Expiration Date:</label>
+        <input type="text" name="expiration" placeholder="MM/YY" required>
+
+        <label>CVV:</label>
+        <input type="password" name="cvv" maxlength="4" required>
+
+        <input type="hidden" name="house_id" value="{{ data[0] }}">
+        <input type="submit" value="Book Property">
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

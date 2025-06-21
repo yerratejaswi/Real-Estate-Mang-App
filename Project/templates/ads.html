@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2f3640;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 95%;
+      margin: 0 auto 30px;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #00a8ff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f3f8fa;
+    }
+
+	button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    background-color: #ff7f50; /* Coral orange */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #ff5722; /* Darker on hover */
+  }
+  </style>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <h2>My Advertisements</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>emailID</th>
+          <th>Property ID</th>
+          <th>Property Type</th>
+          <th>Location</th>
+          <th>City</th>
+          <th>Address</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Availability</th>
+          <th>Crimerate</th>
+          <th>Nearby Schools</th>
+          <th>Available</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in ads %}
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>{{ row[4] }}</td>
+          <td>{{ row[5] }}</td>
+          <td>{{ row[6] }}</td>
+          <td>{{ row[7] }}</td>
+          <td>{{ row[8] }}</td>
+          <td>{{ row[11] }}</td>
+          <td>{{ row[12] }}</td>
+          <td>{{ row[10] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+
+  <button onclick="goBack()">Go Back</button>
+</body>
+</html>

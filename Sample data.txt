@@ -1,0 +1,56 @@
+# Users
+-- insert into users(name,email,password,type) values('vamshi', 'vamshi1@gmail.com','vam','agent');
+-- INSERT INTO users(name,email,password,type) VALUES('aniketh','aniketh@gmail.com', 'ani','agent');
+-- INSERT INTO users(name,email,password,type) VALUES('Tejaswi','tejaswi.yerra@gmail.com', 'pass123','perspective_renter');
+
+-- select * from users;
+
+#agents
+-- INSERT INTO agents(emailID,name,job_title,agency,contact_info) VALUES ('aniketh@gmail.com','aniketh','manager','ARK Realty', '312-721-6465');
+-- INSERT INTO agents(emailID,name,job_title,agency,contact_info) VALUES ('vamshi@gmail.com','vamshi','manager','RR Realty', '312-721-3018');
+-- select * from agents;
+
+#perspective_renters
+-- insert into perspective_renters values('manu02@gmail.com','manu','2025-07-05','Chicago',3000);
+-- insert into perspective_renters values('ram02@gmail.com','ram','2022-04-05','Chicago',2000);
+-- select * from perspective_renters;
+
+
+#renters_address
+-- insert into renterAddress (emailID,line_1,line_2,postal_code,city,state,country)values('manu02@gmail.com','3001 S King Drive','000','60616','Chicago','IL','US');
+-- insert into renterAddress (emailID,line_1,line_2,postal_code,city,state,country)values('ram02@gmail.com','400 E 33rd st','000','60616','Chicago','IL','US');
+-- select * from renterAddress;
+
+
+#credit card information
+-- insert into creditCard_information values('manu02@gmail.com',1234123412341234,'2026-07-04','manu','123');
+-- insert into creditCard_information values('ram02@gmail.com',4321432143214321,'2026-09-02','ram','001');
+
+-- select * from creditCard_information;
+
+
+#property
+-- insert into property(emailID,property_type,location,city,address,price,description,availability,images) values('aniketh@gmail.com','house','South Chicago','Chicago','3001 S King Drive',2400,'good','2022-02-02','yet to be developed');
+-- insert into property(emailID,property_type,location,city,address,price,description,availability,images) values('aniketh@gmail.com','apartment','Downtown','New York','Chambers ST',22000,'furnished & in good condition','2023-09-06','yet to be developed');
+-- insert into property(emailID,property_type,location,city,address,price,description,availability,images) values('vamshi@gmail.com','commercial_building','Downtown','San Fransisco','Bay Area',45000,'good','2023-04-09','yet to be developed');
+-- select * from property;
+
+#houses
+-- insert into houses(houseID,rooms,sft) values(1,2,800);
+-- insert into houses(houseID,rooms,sft) values(2,4,3000);
+-- select * from houses;
+
+#apartments
+-- insert into apartments values(3,5,2250,'apartment_type');
+-- insert into apartments values(7,5,3000,'apartment_type');
+-- select * from apartments;
+
+#commercial_building
+-- insert into commercial_building values(4,35000,'shopping complex');
+-- insert into commercial_building values(5,45000,'shopping complex');
+-- select * from commercial_building;
+
+#bookingRecords
+-- insert into bookingRecords(emailID,propertyID,creditCard) values('manu2@gmail.com',1,1234123412341234);
+-- insert into bookingRecords(emailID,propertyID,creditCard) values('ram02@gmail.com',2,4321432143214321);
+-- select * from bookingRecords;

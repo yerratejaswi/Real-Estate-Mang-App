@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c'); /* Dull background */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      backdrop-filter: brightness(0.8);
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.9);
+      min-height: 100vh;
+      padding-top: 40px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 30px 40px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      color: #444;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      margin-top: 25px;
+      width: 100%;
+      background-color: #00a8ff;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #007acc;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/861/861121.png" alt="Flower Logo">
+      </div>
+      
+           
+      <form method="POST">
+        <h2>Registration Form</h2>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="type">Type:</label>
+        <select id="type" name="type" onchange="showFields()" required>
+          <option value="select">Select</option>
+          <option value="agent">Agent</option>
+          <option value="renter">Prospective Renter</option>
+        </select>
+
+        <div id="agentFields" style="display:none;">
+          <label for="agency">Agency:</label>
+          <input type="text" id="agency" name="agency">
+        </div>
+
+        <div id="renterFields" style="display:none;">
+          <label for="location">Location:</label>
+          <input type="text" id="location" name="location">
+
+          <label for="budget">Budget:</label>
+          <input type="number" id="budget" name="budget">
+
+          <label for="movein">Move-in Date:</label>
+          <input type="date" id="movein" name="movein">
+        </div>
+
+        <input type="submit" value="Register">
+
+        <p>Already have an account? <a href="{{url_for('login')}}">Login</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function showFields() {
+      var type = document.getElementById("type").value;
+      var agentFields = document.getElementById("agentFields");
+      var renterFields = document.getElementById("renterFields");
+
+      if (type === "agent") {
+        agentFields.style.display = "block";
+        renterFields.style.display = "none";
+      } else if (type === "renter") {
+        agentFields.style.display = "none";
+        renterFields.style.display = "block";
+      } else {
+        agentFields.style.display = "none";
+        renterFields.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

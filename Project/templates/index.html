@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+    <style>
+      body {
+        background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c'); /* Hotel background */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .welcome {
+        color: white;
+        text-align: center;
+        margin-top: 40px;
+        font-size: 40px;
+        text-shadow: 2px 2px 8px #000;
+      }
+
+      form {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #000;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        margin-top: 40px;
+      }
+
+      label, input, p {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        font-weight: bold;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      a {
+        color: #007BFF;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="welcome">Welcome to Real Estate Portal</div>
+    <form action="#" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username">
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password">
+
+      <input type="submit" value="Submit">
+      <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+    </form>
+  </body>
+</html>
